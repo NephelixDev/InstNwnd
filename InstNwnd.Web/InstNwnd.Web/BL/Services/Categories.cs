@@ -2,7 +2,7 @@
 
 namespace InstNwnd.Web.BL.Services
 {
-    public class Categories: IBaseService
+    public class Categories: ICategoriesService
     {
     }
 }
