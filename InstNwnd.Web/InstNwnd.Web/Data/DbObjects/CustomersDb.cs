@@ -1,6 +1,6 @@
 ﻿namespace InstNwnd.Web.Data.DbObjects
 {
-    public class Categories
+    public class CustomersDb
     {
     }
 }
