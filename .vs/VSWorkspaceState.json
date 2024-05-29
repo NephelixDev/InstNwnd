@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\InstNwnd.Web",
+    "\\InstNwnd.Web\\InstNwnd.Web",
+    "\\InstNwnd.Web\\InstNwnd.Web\\BL",
+    "\\InstNwnd.Web\\InstNwnd.Web\\BL\\Dto"
   ],
-  "PreviewInSolutionExplorer": false
+  "PreviewInSolutionExplorer": true
 }
