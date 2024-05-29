@@ -2,7 +2,7 @@
 
 namespace InstNwnd.Web.BL.Services
 {
-    public class Territories : ITerritoriesService
+    public class TerritoriesServoce : ITerritoriesService
     {
     }
 }
