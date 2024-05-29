@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\almc0\\.nuget\\packages\\": {}
+    "C:\\Users\\kelobel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\almc0\\OneDrive\\Escritorio\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
+      "projectUniqueName": "C:\\Users\\kelobel\\Source\\Repos\\NephelixDev\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
       "projectName": "InstNwnd.Web",
-      "projectPath": "C:\\Users\\almc0\\OneDrive\\Escritorio\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
-      "packagesPath": "C:\\Users\\almc0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\almc0\\OneDrive\\Escritorio\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\obj\\",
+      "projectPath": "C:\\Users\\kelobel\\Source\\Repos\\NephelixDev\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
+      "packagesPath": "C:\\Users\\kelobel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kelobel\\Source\\Repos\\NephelixDev\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\almc0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kelobel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -40,6 +40,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -64,7 +69,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }
