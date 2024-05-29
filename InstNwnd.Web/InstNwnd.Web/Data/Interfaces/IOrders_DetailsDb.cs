@@ -1,6 +1,6 @@
 ﻿namespace InstNwnd.Web.Data.Interfaces
 {
-    public interface Orders_Details
+    public interface IOrders_DetailsDb
     {
     }
 }
