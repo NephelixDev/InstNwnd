@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InstNwnd.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0efd3f67130268c2346d1605741d8c62afcd3003")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed17727c1e859af9deaf19bb8fec18ddbf2c2913")]
 [assembly: System.Reflection.AssemblyProductAttribute("InstNwnd.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InstNwnd.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
