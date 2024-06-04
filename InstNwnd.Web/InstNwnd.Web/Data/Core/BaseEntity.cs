@@ -5,7 +5,7 @@
         public int Id { get; set; } // Primary Key
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
-        public bool IsDeleted { get; set; } = false;
+        public bool Deleted { get; set; }
 
         // Campos comunes de dirección
         public string Address { get; set; }
