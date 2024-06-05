@@ -8,5 +8,7 @@
         public decimal UnitPrice { get; set; }
         public short UnitsInStock { get; set; }
         public string? Description { get; set; }
+        public DateTime DeleteDate { get; set; }
+        public bool Deleted { get; set; }
     }
 }
