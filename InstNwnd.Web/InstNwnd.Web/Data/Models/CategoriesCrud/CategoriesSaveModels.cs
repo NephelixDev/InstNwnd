@@ -1,6 +1,6 @@
 ﻿namespace InstNwnd.Web.Data.Models.CategoriesCrud
 {
-    public class CategoriesSaveModels
+    public class CustomersSaveModels
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
