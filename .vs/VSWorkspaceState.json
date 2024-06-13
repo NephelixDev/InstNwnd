@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\InstNwnd.Web",
+    "\\InstNwnd.Web\\InstNwnd.Web",
+    "\\InstNwnd.Web\\InstNwnd.Web\\Data",
+    "\\InstNwnd.Web\\InstNwnd.Web\\Properties",
+    "\\InstNwnd.Web\\InstNwnd.Web\\Views",
+    "\\InstNwnd.Web\\InstNwnd.Web\\Views\\Shared"
   ],
+  "SelectedNode": "\\InstNwnd.Web\\InstNwnd.Web\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

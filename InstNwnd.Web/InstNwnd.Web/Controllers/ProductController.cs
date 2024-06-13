@@ -1,77 +1,96 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using InstNwnd.Web.Data.Interfaces;
+using InstNwnd.Web.Data.Models.ProductCrud;
+using System;
 
 namespace InstNwnd.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductsController : Controller
     {
-        // GET: ProductController
+        private readonly IProductDb productDb;
+
+        public ProductsController(IProductDb productDb)
+        {
+            this.productDb = productDb;
+        }
+
+        // GET: Products
         public ActionResult Index()
         {
-            return View();
+            var products = productDb.GetProducts();
+            return View(products);
         }
 
-        // GET: ProductController/Details/5
+        // GET: Products/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var product = productDb.GetProduct(id);
+            return View(product);
         }
 
-        // GET: ProductController/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ProductController/Create
+        // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ProductAddModels productAddModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                productDb.SaveProduct(productAddModel);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(productAddModel);
         }
 
-        // GET: ProductController/Edit/5
+        // GET: Products/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var product = productDb.GetProduct(id);
+            return View(product);
         }
 
-        // POST: ProductController/Edit/5
+        // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ProductUpdateModels productUpdateModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                productUpdateModel.ProductId = id;
+                productDb.UpdateProduct(productUpdateModel);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(productUpdateModel);
         }
 
-        // GET: ProductController/Delete/5
+        // GET: Products/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var product = productDb.GetProduct(id);
+            return View(product);
         }
 
-        // POST: ProductController/Delete/5
+        // POST: Products/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
+                var productRemoveModel = new ProductRemoveModels
+                {
+                    ProductId = id,
+                    Deleted = true,
+                    DeleteDate = DateTime.Now,
+                };
+
+                productDb.RemoveProduct(productRemoveModel);
                 return RedirectToAction(nameof(Index));
             }
             catch

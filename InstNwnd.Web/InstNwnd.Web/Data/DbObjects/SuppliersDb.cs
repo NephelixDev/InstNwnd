@@ -2,6 +2,7 @@
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Interfaces;
 using InstNwnd.Web.Data.Models.SuppliersCrud;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace InstNwnd.Web.Data.DbObjects
             this.context = context;
         }
 
-        public SuppliersModels GetSupplier(int supplierId)
+        public Suppliers GetSupplier(int supplierId)
         {
             var supplier = this.context.Suppliers.Find(supplierId);
 
@@ -25,40 +26,12 @@ namespace InstNwnd.Web.Data.DbObjects
                 throw new Exception("This supplier is not registered.");
             }
 
-            return new SuppliersModels()
-            {
-                SupplierId = supplier.Id,
-                CompanyName = supplier.CompanyName,
-                ContactName = supplier.ContactName,
-                ContactTitle = supplier.ContactTitle,
-                Address = supplier.Address,
-                City = supplier.City,
-                Region = supplier.Region,
-                PostalCode = supplier.PostalCode,
-                Country = supplier.Country,
-                Phone = supplier.Phone,
-                Fax = supplier.Fax,
-                HomePage = supplier.HomePage
-            };
+            return supplier;
         }
 
-        public List<SuppliersModels> GetSuppliers()
+        public List<Suppliers> GetSuppliers()
         {
-            return this.context.Suppliers.Select(s => new SuppliersModels()
-            {
-                SupplierId = s.Id,
-                CompanyName = s.CompanyName,
-                ContactName = s.ContactName,
-                ContactTitle = s.ContactTitle,
-                Address = s.Address,
-                City = s.City,
-                Region = s.Region,
-                PostalCode = s.PostalCode,
-                Country = s.Country,
-                Phone = s.Phone,
-                Fax = s.Fax,
-                HomePage = s.HomePage
-            }).ToList();
+            return this.context.Suppliers.ToList();
         }
 
         public void RemoveSupplier(SuppliersRemoveModels removeSupplier)
@@ -70,9 +43,7 @@ namespace InstNwnd.Web.Data.DbObjects
                 throw new Exception("This supplier is not registered.");
             }
 
-            supplierToDelete.Deleted = removeSupplier.Deleted;
- 
-            this.context.Suppliers.Update(supplierToDelete);
+            this.context.Suppliers.Remove(supplierToDelete);
             this.context.SaveChanges();
         }
 
@@ -90,7 +61,8 @@ namespace InstNwnd.Web.Data.DbObjects
                 Country = saveSupplier.Country,
                 Phone = saveSupplier.Phone,
                 Fax = saveSupplier.Fax,
-             };
+                HomePage = saveSupplier.HomePage
+            };
 
             this.context.Suppliers.Add(supplier);
             this.context.SaveChanges();

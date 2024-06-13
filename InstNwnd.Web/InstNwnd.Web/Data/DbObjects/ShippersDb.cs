@@ -1,8 +1,10 @@
-﻿using InstNwnd.Web.BL.Exceptions;
-using InstNwnd.Web.Data.Context;
+﻿using InstNwnd.Web.Data.Context;
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Interfaces;
 using InstNwnd.Web.Data.Models.ShippersCrud;
+ using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InstNwnd.Web.Data.DbObjects
 {
@@ -15,31 +17,21 @@ namespace InstNwnd.Web.Data.DbObjects
             this.context = context;
         }
 
-        public ShippersModels GetShipper(int shipperId)
+        public Shippers GetShipper(int shipperId)
         {
             var shipper = this.context.Shippers.Find(shipperId);
 
             if (shipper == null)
             {
-                throw new ShippersException("This shipper is not registered.");
+                throw new Exception("This shipper is not registered.");
             }
 
-            return new ShippersModels()
-            {
-                ShipperId = shipper.ShipperID,
-                CompanyName = shipper.CompanyName,
-                Phone = shipper.Phone
-            };
+            return shipper;
         }
 
-        public List<ShippersModels> GetShippers()
+        public List<Shippers> GetShippers()
         {
-            return this.context.Shippers.Select(s => new ShippersModels()
-            {
-                ShipperId = s.ShipperID,
-                CompanyName = s.CompanyName,
-                Phone = s.Phone
-            }).ToList();
+            return this.context.Shippers.ToList();
         }
 
         public void RemoveShipper(ShippersRemoveModels removeShipper)
@@ -48,12 +40,10 @@ namespace InstNwnd.Web.Data.DbObjects
 
             if (shipperToDelete == null)
             {
-                throw new ShippersException("This shipper is not registered.");
+                throw new Exception("This shipper is not registered.");
             }
 
-            shipperToDelete.Deleted = removeShipper.Deleted;
- 
-            this.context.Shippers.Update(shipperToDelete);
+            this.context.Shippers.Remove(shipperToDelete);
             this.context.SaveChanges();
         }
 
@@ -75,7 +65,7 @@ namespace InstNwnd.Web.Data.DbObjects
 
             if (shipperToUpdate == null)
             {
-                throw new ShippersException("This shipper is not registered.");
+                throw new Exception("This shipper is not registered.");
             }
 
             shipperToUpdate.CompanyName = updateShipper.CompanyName;

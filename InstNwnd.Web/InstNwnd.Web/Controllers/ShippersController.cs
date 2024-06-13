@@ -1,77 +1,94 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using InstNwnd.Web.Data.Interfaces;
+using System;
+using InstNwnd.Web.Data.Models.ShippersCrud;
 
 namespace InstNwnd.Web.Controllers
 {
     public class ShippersController : Controller
     {
-        // GET: ShippersController
+        private readonly IShippersDb shippersDb;
+
+        public ShippersController(IShippersDb shippersDb)
+        {
+            this.shippersDb = shippersDb;
+        }
+
+        // GET: Shippers
         public ActionResult Index()
         {
-            return View();
+            var shippers = shippersDb.GetShippers();
+            return View(shippers);
         }
 
-        // GET: ShippersController/Details/5
+        // GET: Shippers/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var shipper = shippersDb.GetShipper(id);
+            return View(shipper);
         }
 
-        // GET: ShippersController/Create
+        // GET: Shippers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ShippersController/Create
+        // POST: Shippers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ShippersAddModels shipperAddModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                shippersDb.SaveShipper(shipperAddModel);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(shipperAddModel);
         }
 
-        // GET: ShippersController/Edit/5
+        // GET: Shippers/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var shipper = shippersDb.GetShipper(id);
+            return View(shipper);
         }
 
-        // POST: ShippersController/Edit/5
+        // POST: Shippers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ShippersUpdateModels shipperUpdateModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                shipperUpdateModel.ShipperId = id;
+                shippersDb.UpdateShipper(shipperUpdateModel);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(shipperUpdateModel);
         }
 
-        // GET: ShippersController/Delete/5
+        // GET: Shippers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var shipper = shippersDb.GetShipper(id);
+            return View(shipper);
         }
 
-        // POST: ShippersController/Delete/5
+        // POST: Shippers/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
+                var shipperRemoveModel = new ShippersRemoveModels
+                {
+                    ShipperId = id
+                };
+
+                shippersDb.RemoveShipper(shipperRemoveModel);
                 return RedirectToAction(nameof(Index));
             }
             catch

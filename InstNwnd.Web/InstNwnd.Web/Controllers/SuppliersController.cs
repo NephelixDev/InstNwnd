@@ -1,77 +1,94 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using InstNwnd.Web.Data.Interfaces;
+using System;
+using InstNwnd.Web.Data.Models.SuppliersCrud;
 
 namespace InstNwnd.Web.Controllers
 {
     public class SuppliersController : Controller
     {
-        // GET: SuppliersController
+        private readonly ISuppliersDb suppliersDb;
+
+        public SuppliersController(ISuppliersDb suppliersDb)
+        {
+            this.suppliersDb = suppliersDb;
+        }
+
+        // GET: Suppliers
         public ActionResult Index()
         {
-            return View();
+            var suppliers = suppliersDb.GetSuppliers();
+            return View(suppliers);
         }
 
-        // GET: SuppliersController/Details/5
+        // GET: Suppliers/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var supplier = suppliersDb.GetSupplier(id);
+            return View(supplier);
         }
 
-        // GET: SuppliersController/Create
+        // GET: Suppliers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: SuppliersController/Create
+        // POST: Suppliers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(SuppliersAddModels supplierAddModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                suppliersDb.SaveSupplier(supplierAddModel);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(supplierAddModel);
         }
 
-        // GET: SuppliersController/Edit/5
+        // GET: Suppliers/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var supplier = suppliersDb.GetSupplier(id);
+            return View(supplier);
         }
 
-        // POST: SuppliersController/Edit/5
+        // POST: Suppliers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, SuppliersUpdateModels supplierUpdateModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                supplierUpdateModel.SupplierId = id;
+                suppliersDb.UpdateSupplier(supplierUpdateModel);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(supplierUpdateModel);
         }
 
-        // GET: SuppliersController/Delete/5
+        // GET: Suppliers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var supplier = suppliersDb.GetSupplier(id);
+            return View(supplier);
         }
 
-        // POST: SuppliersController/Delete/5
+        // POST: Suppliers/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
+                var supplierRemoveModel = new SuppliersRemoveModels
+                {
+                    SupplierId = id
+                };
+
+                suppliersDb.RemoveSupplier(supplierRemoveModel);
                 return RedirectToAction(nameof(Index));
             }
             catch

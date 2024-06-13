@@ -17,7 +17,7 @@ namespace InstNwnd.Web.Data.DbObjects
             this.context = context;
         }
 
-        public ProductModels GetProduct(int productId)
+        public Product GetProduct(int productId)
         {
             var product = this.context.Product.Find(productId);
 
@@ -26,32 +26,12 @@ namespace InstNwnd.Web.Data.DbObjects
                 throw new Exception("This product is not registered.");
             }
 
-            return new ProductModels()
-            {
-                ProductId = product.Id,
-                ProductName = product.ProductName,
-                QuantityPerUnit = product.QuantityPerUnit,
-                UnitPrice = product.UnitPrice ?? 0, // Manejo de decimal?
-                UnitsInStock = product.UnitsInStock ?? 0, // Manejo de short?
-                Deleted = product.Deleted,
-                DeleteDate = product.DeleteDate,
-                Description = product.Description
-            };
+            return product;
         }
 
-        public List<ProductModels> GetProducts()
+        public List<Product> GetProducts()
         {
-            return this.context.Product.Select(p => new ProductModels()
-            {
-                ProductId = p.Id,
-                ProductName = p.ProductName,
-                QuantityPerUnit = p.QuantityPerUnit,
-                UnitPrice = p.UnitPrice ?? 0, // Manejo de decimal?
-                UnitsInStock = p.UnitsInStock ?? 0, // Manejo de short?
-                Deleted = p.Deleted,
-                DeleteDate = p.DeleteDate,
-                Description = p.Description
-            }).ToList();
+            return this.context.Product.ToList();
         }
 
         public void RemoveProduct(ProductRemoveModels removeProduct)
