@@ -1,8 +1,17 @@
+using InstNwnd.Web.Data.Context;
+using InstNwnd.Web.Data.DbObjects;
+using InstNwnd.Web.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
+builder.Services.AddDbContext<InstNwndContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("InstNwndContext")));
+
+builder.Services.AddScoped<ICategoriesDb, CategoriesDb>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

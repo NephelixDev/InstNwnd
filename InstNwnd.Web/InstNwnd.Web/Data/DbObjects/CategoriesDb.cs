@@ -1,11 +1,11 @@
-﻿using InstNwnd.Web.BL.Exceptions;
+﻿using InstNwnd.Web.Data.Interfaces;
+using InstNwnd.Web.Data.Models.CategoriesCrud;
 using InstNwnd.Web.Data.Context;
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Exceptions;
-using InstNwnd.Web.Data.Interfaces;
-using InstNwnd.Web.Data.Models.CategoriesCrud;
-
-
+using System.Collections.Generic;
+using System.Linq;
+using InstNwnd.Web.BL.Exceptions;
 
 namespace InstNwnd.Web.Data.DbObjects
 {
@@ -18,7 +18,18 @@ namespace InstNwnd.Web.Data.DbObjects
             this.context = context;
         }
 
-        public CategoriesModels GetCategory(int categoryId)
+        public List<CategoriesBaseModels> GetCategories()
+        {
+            return this.context.Categories.Select(c => new CategoriesBaseModels()
+            {
+                CategoryId = c.CategoryId,
+                CategoryName = c.CategoryName,
+                Description = c.Description,
+                Picture = c.Picture
+            }).ToList();
+        }
+
+        public CategoriesBaseModels GetCategories(int categoryId)
         {
             var category = this.context.Categories.Find(categoryId);
 
@@ -27,72 +38,57 @@ namespace InstNwnd.Web.Data.DbObjects
                 throw new CategoriesException("Esta categoría no se encuentra registrada.");
             }
 
-            CategoriesModels categoryModel = new CategoriesModels()
+            return new CategoriesBaseModels()
             {
-                CategoryId = category.Id,
+                CategoryId = category.CategoryId,
                 CategoryName = category.CategoryName,
                 Description = category.Description,
                 Picture = category.Picture
             };
-
-            return categoryModel;
         }
 
-        public List<CategoriesModels> GetCategories()
-        {
-            return this.context.Categories.Select(c => new CategoriesModels()
-            {
-                CategoryId = c.Id,
-                CategoryName = c.CategoryName,
-                Description = c.Description,
-                Picture = c.Picture
-            }).ToList();
-        }
-
-        public void RemoveCategory(CategoriesRemoveModels removeCategory)
-        {
-            Categories categoryToDelete = this.context.Categories.Find(removeCategory.CategoryId);
-
-            if (categoryToDelete == null)
-            {
-                throw new CategoriesDbException("Esta categoría no se encuentra registrada.");
-            }
-
-            categoryToDelete.Deleted = removeCategory.Deleted;
-           
-
-            this.context.Categories.Update(categoryToDelete);
-            this.context.SaveChanges();
-        }
-
-        public void SaveCategory(CategoriesAddModels saveCategory)
+        public void SaveCategories(CustomersSaveModels categoriesSaveModels)
         {
             Categories category = new Categories()
             {
-                CategoryName = saveCategory.CategoryName,
-                Description = saveCategory.Description,
-                Picture = saveCategory.Picture,
-              
+                CategoryName = categoriesSaveModels.CategoryName,
+                Description = categoriesSaveModels.Description,
+                Picture = categoriesSaveModels.Picture
             };
             this.context.Categories.Add(category);
             this.context.SaveChanges();
         }
 
-        public void UpdateCategory(CategoriesRemoveModels updateCategory)
+        public void UpdateCategories(CategoriesUpdateModels categoriesUpdate)
         {
-            Categories categoryToUpdate = this.context.Categories.Find(updateCategory.CategoryId);
+            Categories categoryToUpdate = this.context.Categories.Find(categoriesUpdate.CategoryId);
 
             if (categoryToUpdate == null)
             {
                 throw new CategoriesException("Esta categoría no se encuentra registrada.");
             }
 
-            
-            categoryToUpdate.Description = updateCategory.Description;
-            categoryToUpdate.Picture = updateCategory.Picture;
-            
+            categoryToUpdate.CategoryName = categoriesUpdate.CategoryName;
+            categoryToUpdate.Description = categoriesUpdate.Description;
+            categoryToUpdate.Picture = categoriesUpdate.Picture;
 
             this.context.Categories.Update(categoryToUpdate);
+            this.context.SaveChanges();
+        }
+
+        public void RemoveCategories(CategoriesRemoveModels categoriesRemove)
+        {
+            Categories categoryToDelete = this.context.Categories.Find(categoriesRemove.CategoryId);
+
+            if (categoryToDelete == null)
+            {
+                throw new CategoriesException("Esta categoría no se encuentra registrada.");
+            }
+
+            // Asignar la propiedad Deleted y luego actualizar
+            categoryToDelete.Deleted = categoriesRemove.Deleted;
+
+            this.context.Categories.Update(categoryToDelete);
             this.context.SaveChanges();
         }
     }

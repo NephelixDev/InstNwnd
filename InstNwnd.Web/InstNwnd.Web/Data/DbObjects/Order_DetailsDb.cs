@@ -1,25 +1,25 @@
-﻿
-using InstNwnd.Web.Data.Context;
+﻿using InstNwnd.Web.Data.Context;
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Exceptions;
 using InstNwnd.Web.Data.Interfaces;
 using InstNwnd.Web.Data.Models.Order_DetailsCrud;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InstNwnd.Web.Data.DbObjects
 {
     public class Order_DetailsDb : IOrders_DetailsDb
     {
-        private readonly InstNwndContext context;
+        private readonly InstNwndContext _context;
 
         public Order_DetailsDb(InstNwndContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public Order_DetailsModels GetOrderDetail(int orderId, int productId)
         {
-            var orderDetail = this.context.Order_Details.Find(orderId, productId);
+            var orderDetail = _context.Order_Details.Find(orderId, productId);
 
             if (orderDetail == null)
             {
@@ -40,7 +40,7 @@ namespace InstNwnd.Web.Data.DbObjects
 
         public List<Order_DetailsModels> GetOrderDetails()
         {
-            return this.context.Order_Details.Select(od => new Order_DetailsModels()
+            return _context.Order_Details.Select(od => new Order_DetailsModels()
             {
                 OrderID = od.OrderID,
                 ProductID = od.ProductID,
@@ -52,15 +52,15 @@ namespace InstNwnd.Web.Data.DbObjects
 
         public void RemoveOrderDetail(Order_DetailsRemoveModels removeOrderDetail)
         {
-            var orderDetailToDelete = this.context.Order_Details.Find(removeOrderDetail.OrderID, removeOrderDetail.ProductID);
+            var orderDetailToDelete = _context.Order_Details.Find(removeOrderDetail.OrderID, removeOrderDetail.ProductID);
 
             if (orderDetailToDelete == null)
             {
                 throw new Order_DetailsDbException("Este detalle de pedido no se encuentra registrado.");
             }
 
-            this.context.Order_Details.Remove(orderDetailToDelete);
-            this.context.SaveChanges();
+            _context.Order_Details.Remove(orderDetailToDelete);
+            _context.SaveChanges();
         }
 
         public void SaveOrderDetail(Order_DetailsSaveModels saveOrderDetail)
@@ -73,13 +73,13 @@ namespace InstNwnd.Web.Data.DbObjects
                 Quantity = saveOrderDetail.Quantity,
                 Discount = saveOrderDetail.Discount
             };
-            this.context.Order_Details.Add(orderDetail);
-            this.context.SaveChanges();
+            _context.Order_Details.Add(orderDetail);
+            _context.SaveChanges();
         }
 
         public void UpdateOrderDetail(Order_DetailsUpdateModels updateOrderDetail)
         {
-            var orderDetailToUpdate = this.context.Order_Details.Find(updateOrderDetail.OrderID, updateOrderDetail.ProductID);
+            var orderDetailToUpdate = _context.Order_Details.Find(updateOrderDetail.OrderID, updateOrderDetail.ProductID);
 
             if (orderDetailToUpdate == null)
             {
@@ -90,8 +90,7 @@ namespace InstNwnd.Web.Data.DbObjects
             orderDetailToUpdate.Quantity = updateOrderDetail.Quantity;
             orderDetailToUpdate.Discount = updateOrderDetail.Discount;
 
-            this.context.SaveChanges();
+            _context.SaveChanges();
         }
-
     }
 }

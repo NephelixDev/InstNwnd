@@ -1,77 +1,96 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using InstNwnd.Web.Data.Interfaces;
+using InstNwnd.Web.Data.Models.CategoriesCrud;
+using System;
 
 namespace InstNwnd.Web.Controllers
 {
     public class CategoriesController : Controller
     {
-        // GET: CategoriesController
+        private readonly ICategoriesDb categoriesDb;
+
+        public CategoriesController(ICategoriesDb categoriesDb)
+        {
+            this.categoriesDb = categoriesDb;
+        }
+
+        // GET: Categories
         public ActionResult Index()
         {
-            return View();
+            var categories = categoriesDb.GetCategories();
+            return View(categories);
         }
 
-        // GET: CategoriesController/Details/5
+        // GET: Categories/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var category = categoriesDb.GetCategories(id);
+            return View(category);
         }
 
-        // GET: CategoriesController/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoriesController/Create
+        // POST: Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CustomersSaveModels CategoriesSaveModels)
         {
-            try
+            if (ModelState.IsValid)
             {
+                categoriesDb.SaveCategories(CategoriesSaveModels);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(CategoriesSaveModels);
         }
 
-        // GET: CategoriesController/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var category = categoriesDb.GetCategories(id);
+            return View(category);
         }
 
-        // POST: CategoriesController/Edit/5
+        // POST: Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, CategoriesUpdateModels categoriesUpdateModels)
         {
-            try
+            if (ModelState.IsValid)
             {
+                categoriesUpdateModels.CategoryId = id;
+                categoriesDb.UpdateCategories(categoriesUpdateModels);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(categoriesUpdateModels);
         }
 
-        // GET: CategoriesController/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var category = categoriesDb.GetCategories(id);
+            return View(category);
         }
 
-        // POST: CategoriesController/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
+                var categoryRemoveModel = new CategoriesRemoveModels
+                {
+                    CategoryId = id,
+                    Deleted = true,
+                    DeleteDate = DateTime.Now,
+                };
+
+                categoriesDb.RemoveCategories(categoryRemoveModel);
                 return RedirectToAction(nameof(Index));
             }
             catch
