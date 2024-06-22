@@ -1,8 +1,17 @@
-﻿using InstNwnd.Web.BL.Core;
+﻿using InstNwnd.Web.BL.Interfaces;
+using InstNwnd.Web.Data.Interfaces;
 
-namespace InstNwnd.Web.BL.Services
+
+namespace InstNwnd.Web.BL.Services;
+
+public class CustomersService : ICustomersServices
 {
-    public class CustomersService: ICategoriesService
+    private readonly ICustomersDb CustomersDb;
+
+    public CustomersService(ICustomersDb CustomersDb)
     {
+        this.CustomersDb = CustomersDb;
     }
+
+   
 }

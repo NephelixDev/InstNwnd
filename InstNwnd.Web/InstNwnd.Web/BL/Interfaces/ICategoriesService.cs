@@ -1,6 +1,8 @@
-﻿namespace InstNwnd.Web.BL.Core
+﻿namespace InstNwnd.Web.BL.Interfaces
+
 {
     public interface ICategoriesService
     {
+        
     }
 }

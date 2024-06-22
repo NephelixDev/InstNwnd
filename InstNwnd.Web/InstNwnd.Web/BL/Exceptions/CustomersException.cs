@@ -1,8 +1,8 @@
 ﻿namespace InstNwnd.Web.BL.Exceptions
 {
-    public class CustomerException : Exception
+    public class CustomerServicesException : Exception
     {
-        public CustomerException(string message) : base(message)
+        public CustomerServicesException(string message) : base(message)
         {
         }
     }
