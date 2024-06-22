@@ -1,0 +1,43 @@
+﻿@model IEnumerable<InstNwnd.Web.Data.Models.Territories.TerritoriesGetModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Territories</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TerritoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TerritoryDescription)
+            </th>
+            <
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TerritoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TerritoryDescription)
+            </td>
+            
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TerritoryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TerritoryID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TerritoryID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

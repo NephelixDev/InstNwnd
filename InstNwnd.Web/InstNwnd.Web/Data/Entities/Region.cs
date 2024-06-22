@@ -1,14 +1,23 @@
-﻿using InstNwnd.Web.Data.Core;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using InstNwnd.Web.Data.Core;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InstNwnd.Web.Data.Entities
 {
-    public class Region :BaseEntity
+    [Table("Region", Schema = "dbo")]
+    public class Region
     {
-     public string RegionDescription { get; set; }
-        public object RegionName { get; internal set; }
-        public object Description { get; internal set; }
-        public object Deleted { get; internal set; }
-        public int RegionID { get; internal set; }
-        public DateTime ModifyDate { get; internal set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int RegionID { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string RegionDescription { get; set; } = string.Empty;
+
+        // Las propiedades heredadas de BaseEntity ya están definidas en BaseEntity
     }
 }

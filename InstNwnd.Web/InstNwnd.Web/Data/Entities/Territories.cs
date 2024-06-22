@@ -1,11 +1,24 @@
-﻿namespace InstNwnd.Web.Data.Entities
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using InstNwnd.Web.Data.Core;
+
+namespace InstNwnd.Web.Data.Entities
 {
-    public class Territories
+    [Table("Territories", Schema = "dbo")]
+    public class Territories 
     {
-        public string TerritoryDescription { get; set; }
-        public int RegionId { get; set; }
-        public object Id { get; internal set; }
-        public object TerritoryName { get; internal set; }
-        public object Deleted { get; internal set; }
+        [Key]
+        [MaxLength(20)] // Según el diseño de la base de datos de Northwind, TerritoryID es una cadena
+        public string TerritoryID { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(50)]
+        public string TerritoryDescription { get; set; } = string.Empty;
+
+        [ForeignKey("Region")]
+        public int RegionID { get; set; }
+
+        // Las propiedades heredadas de BaseEntity ya están definidas en BaseEntity
     }
 }

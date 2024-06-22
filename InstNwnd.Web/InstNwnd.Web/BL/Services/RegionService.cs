@@ -1,9 +1,8 @@
-﻿
-using InstNwnd.Web.BL.Interfaces;
-
+﻿using InstNwnd.Web.BL.Interfaces;
 namespace InstNwnd.Web.BL.Services
 {
-    public class RegionService : IRegionservice
+    public class RegionService : IRegionService
     {
+
     }
 }
