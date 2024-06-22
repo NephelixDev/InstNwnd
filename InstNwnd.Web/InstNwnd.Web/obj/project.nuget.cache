@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Nrs44KrkB3Q=",
+  "dgSpecHash": "gPqpzbpg3rg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\smith\\OneDrive\\Escritorio\\InstNwnd\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
+  "projectFilePath": "C:\\Users\\smith\\OneDrive\\Escritorio\\tareas\\InstNwnd\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\smith\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\smith\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
