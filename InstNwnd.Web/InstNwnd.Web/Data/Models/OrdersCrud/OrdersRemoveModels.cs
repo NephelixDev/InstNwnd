@@ -1,7 +1,6 @@
 ﻿namespace InstNwnd.Web.Data.Models.OrdersCrud
 {
-    public class OrdersRemoveModels
+    public class OrdersRemoveModels : OrdersModels
     {
-        public int OrderId { get; set; }
     }
 }

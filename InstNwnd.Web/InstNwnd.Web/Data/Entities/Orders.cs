@@ -1,24 +1,52 @@
-﻿using InstNwnd.Web.Data.Core;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstNwnd.Web.Data.Entities
 {
-    public class Orders : BaseEntity
+    [Table("Orders", Schema = "dbo")]
+    public class Orders
     {
-        public int CustomerId { get; set; } 
-        public int EmployeeId { get; set; } 
-        public DateTime? OrderDate { get; set; }
-        public DateTime? RequiredDate { get; set; }
-        public DateTime? ShippedDate { get; set; }
-        public int ShipVia { get; set; } 
-        public decimal? Freight { get; set; } 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int OrderID { get; set; }
 
-        // Información de envío
-        public string ShipName { get; set; }
-        public string ShipAddress { get; set; }
-        public string ShipCity { get; set; }
-        public string ShipRegion { get; set; }
-        public string ShipPostalCode { get; set; }
-        public string ShipCountry { get; set; }
-        public object OrderId { get; internal set; }
+        [ForeignKey("CustomerID")]
+        public string? CustomerID { get; set; }
+
+        [Required]
+        public int? EmployeeID { get; set; }
+
+        [Required]
+        public DateTime? OrderDate { get; set; }
+
+        public DateTime? RequiredDate { get; set; }
+
+        public DateTime? ShippedDate { get; set; }
+        [ForeignKey("ShipVia")]
+        public int? ShipVia { get; set; }
+
+        public decimal? Freight { get; set; }
+        [MaxLength(40)]
+        public string? ShipName { get; set; }
+
+        [MaxLength(60)]
+        public string? ShipAddress { get; set; }
+
+        [MaxLength(15)]
+        public string? ShipCity { get; set; }
+
+        [MaxLength(15)]
+        public string? ShipRegion { get; set; }
+
+        [MaxLength(10)]
+        public string? ShipPostalCode { get; set; }
+
+        [MaxLength(15)]
+        public string? ShipCountry { get; set; }
+
+        // Propiedad de navegación
+        [ForeignKey("EmployeeID")]
+        public Employees Employee { get; set; }
     }
 }

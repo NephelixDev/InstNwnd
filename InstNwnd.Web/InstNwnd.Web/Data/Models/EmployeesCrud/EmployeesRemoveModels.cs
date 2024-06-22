@@ -1,8 +1,7 @@
 ﻿namespace InstNwnd.Web.Data.Models.EmployeesCrud
 {
-    public class EmployeesRemoveModels
+    public class EmployeesRemoveModels : EmployeesModels
     {
-        public int EmployeeId { get; set; }
-        public bool Deleted { get; set; }
+
     }
 }

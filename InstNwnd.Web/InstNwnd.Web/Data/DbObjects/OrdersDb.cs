@@ -1,5 +1,4 @@
-﻿using InstNwnd.Web.BL.Exceptions;
-using InstNwnd.Web.Data.Context;
+﻿using InstNwnd.Web.Data.Context;
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Exceptions;
 using InstNwnd.Web.Data.Interfaces;
@@ -18,20 +17,23 @@ namespace InstNwnd.Web.Data.DbObjects
             this.context = context;
         }
 
-        public OrdersModels GetOrder(int orderId)
+        private Orders ValidateOrderExists(int orderId)
         {
             var order = this.context.Orders.Find(orderId);
-
             if (order == null)
             {
-                throw new OrdersException("Esta orden no se encuentra registrada.");
+                throw new OrdersDbException("Este pedido no se encuentra registrado.");
             }
+            return order;
+        }
 
-            OrdersModels orderModel = new OrdersModels()
+        private static OrdersModels MapToModel(Orders order)
+        {
+            return new OrdersModels
             {
-                OrderId = order.OrderId,
-                CustomerId = order.CustomerId,
-                EmployeeId = order.EmployeeId,
+                OrderId = order.OrderID,
+                CustomerId = order.CustomerID,
+                EmployeeID = order.EmployeeID,
                 OrderDate = order.OrderDate,
                 RequiredDate = order.RequiredDate,
                 ShippedDate = order.ShippedDate,
@@ -43,92 +45,82 @@ namespace InstNwnd.Web.Data.DbObjects
                 ShipRegion = order.ShipRegion,
                 ShipPostalCode = order.ShipPostalCode,
                 ShipCountry = order.ShipCountry
+                
             };
+        }
 
-            return orderModel;
+        private void MapToEntity(OrdersUpdateModels model, Orders entity)
+        {
+            entity.CustomerID = model.CustomerId;
+            entity.EmployeeID = model.EmployeeID;
+            entity.OrderDate = model.OrderDate;
+            entity.RequiredDate = model.RequiredDate;
+            entity.ShippedDate = model.ShippedDate;
+            entity.ShipVia = model.ShipVia;
+            entity.Freight = model.Freight;
+            entity.ShipName = model.ShipName;
+            entity.ShipAddress = model.ShipAddress;
+            entity.ShipCity = model.ShipCity;
+            entity.ShipRegion = model.ShipRegion;
+            entity.ShipPostalCode = model.ShipPostalCode;
+            entity.ShipCountry = model.ShipCountry;
+            
+        }
+
+        private Orders MapToEntity(OrdersSaveModels model)
+        {
+
+            Orders entity = new Orders();
+            entity.CustomerID = model.CustomerId;
+            entity.EmployeeID = model.EmployeeID;
+            entity.OrderDate = model.OrderDate;
+            entity.RequiredDate = model.RequiredDate;
+            entity.ShippedDate = model.ShippedDate;
+            entity.ShipVia = model.ShipVia;
+            entity.Freight = model.Freight;
+            entity.ShipName = model.ShipName;
+            entity.ShipAddress = model.ShipAddress;
+            entity.ShipCity = model.ShipCity;
+            entity.ShipRegion = model.ShipRegion;
+            entity.ShipPostalCode = model.ShipPostalCode;
+            entity.ShipCountry = model.ShipCountry;
+                return entity;
+            
         }
 
         public List<OrdersModels> GetOrders()
         {
-            return this.context.Orders.Select(o => new OrdersModels()
-            {
-                OrderId = o.OrderId,
-                CustomerId = o.CustomerId,
-                EmployeeId = o.EmployeeId,
-                OrderDate = o.OrderDate,
-                RequiredDate = o.RequiredDate,
-                ShippedDate = o.ShippedDate,
-                ShipVia = o.ShipVia,
-                Freight = o.Freight,
-                ShipName = o.ShipName,
-                ShipAddress = o.ShipAddress,
-                ShipCity = o.ShipCity,
-                ShipRegion = o.ShipRegion,
-                ShipPostalCode = o.ShipPostalCode,
-                ShipCountry = o.ShipCountry
-            }).ToList();
+            return this.context.Orders
+                .Select(order => MapToModel(order))
+                .ToList();
         }
 
-        public void RemoveOrder(OrdersRemoveModels removeOrder)
+        public OrdersModels GetOrder(int orderId)
         {
-            Orders orderToDelete = this.context.Orders.Find(removeOrder.OrderId);
-
-            if (orderToDelete == null)
-            {
-                throw new OrdersDbException("Esta orden no se encuentra registrada.");
-            }
-
-            this.context.Orders.Remove(orderToDelete);
-            this.context.SaveChanges();
-        }
-
-        public void SaveOrder(OrdersSaveModels saveOrder)
-        {
-            Orders order = new Orders()
-            {
-                CustomerId = saveOrder.CustomerId,
-                EmployeeId = saveOrder.EmployeeId,
-                OrderDate = saveOrder.OrderDate,
-                RequiredDate = saveOrder.RequiredDate,
-                ShippedDate = saveOrder.ShippedDate,
-                ShipVia = saveOrder.ShipVia,
-                Freight = saveOrder.Freight,
-                ShipName = saveOrder.ShipName,
-                ShipAddress = saveOrder.ShipAddress,
-                ShipCity = saveOrder.ShipCity,
-                ShipRegion = saveOrder.ShipRegion,
-                ShipPostalCode = saveOrder.ShipPostalCode,
-                ShipCountry = saveOrder.ShipCountry
-            };
-            this.context.Orders.Add(order);
-            this.context.SaveChanges();
+            var order = ValidateOrderExists(orderId);
+            return MapToModel(order);
         }
 
 
         public void UpdateOrder(OrdersUpdateModels updateOrder)
         {
-            Orders orderToUpdate = this.context.Orders.Find(updateOrder.OrderId);
+            var order = ValidateOrderExists(updateOrder.OrderId);
+            MapToEntity(updateOrder, order);
+            this.context.Orders.Update(order);
+            this.context.SaveChanges();
+        }
 
-            if (orderToUpdate == null)
-            {
-                throw new OrdersException("Esta orden no se encuentra registrada.");
-            }
+        public void RemoveOrder(OrdersRemoveModels removeOrder)
+        {
+            var order = ValidateOrderExists(removeOrder.OrderId);
+            this.context.Orders.Remove(order);
+            this.context.SaveChanges();
+        }
 
-            orderToUpdate.CustomerId = updateOrder.CustomerId;
-            orderToUpdate.EmployeeId = updateOrder.EmployeeId;
-            orderToUpdate.OrderDate = updateOrder.OrderDate;
-            orderToUpdate.RequiredDate = updateOrder.RequiredDate;
-            orderToUpdate.ShippedDate = updateOrder.ShippedDate;
-            orderToUpdate.ShipVia = updateOrder.ShipVia;
-            orderToUpdate.Freight = updateOrder.Freight;
-            orderToUpdate.ShipName = updateOrder.ShipName;
-            orderToUpdate.ShipAddress = updateOrder.ShipAddress;
-            orderToUpdate.ShipCity = updateOrder.ShipCity;
-            orderToUpdate.ShipRegion = updateOrder.ShipRegion;
-            orderToUpdate.ShipPostalCode = updateOrder.ShipPostalCode;
-            orderToUpdate.ShipCountry = updateOrder.ShipCountry;
-
-            this.context.Orders.Update(orderToUpdate);
+        public void SaveOrder(OrdersSaveModels saveOrder)
+        {
+            var order = MapToEntity(saveOrder);
+            this.context.Orders.Add(order);
             this.context.SaveChanges();
         }
     }
