@@ -1,8 +1,8 @@
 ﻿namespace InstNwnd.Web.Data.Models.ShipperCrud
 {
-    public class ShipperGetModels
+    public class ShippersGetModels
     {
-        public int ShipperId { get; set; }
+        public int ShipperID { get; set; }
         public string CompanyName { get; set; }
         public string Phone { get; set; }
         public bool Deleted { get; set; }

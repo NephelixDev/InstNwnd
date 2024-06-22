@@ -1,94 +1,104 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using InstNwnd.Web.Data.Interfaces;
-using System;
 using InstNwnd.Web.Data.Models.SuppliersCrud;
+using InstNwnd.Web.Data.Models.SupplierCrud;
 
 namespace InstNwnd.Web.Controllers
 {
     public class SuppliersController : Controller
     {
-        private readonly ISuppliersDb suppliersDb;
+        private readonly ISuppliersDb suppliersServices;
 
         public SuppliersController(ISuppliersDb suppliersDb)
         {
-            this.suppliersDb = suppliersDb;
+            this.suppliersServices = suppliersDb;
         }
 
-        // GET: Suppliers
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            var suppliers = suppliersDb.GetSuppliers();
-            return View(suppliers);
+            var suppliers = suppliersServices.GetSuppliers(); // Obtener la lista de proveedores desde la base de datos
+            var supplierModels = suppliers.Select(s => new SupplierGetModels
+            {
+                SupplierID = s.SupplierID,
+                CompanyName = s.CompanyName,
+                ContactName = s.ContactName,
+                // Asegúrate de mapear todas las propiedades necesarias
+            }).ToList();
+
+            return View(supplierModels); // Enviar el modelo correcto a la vista
         }
 
-        // GET: Suppliers/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
-            var supplier = suppliersDb.GetSupplier(id);
+            var supplier = suppliersServices.GetSuppliers(id); // Cambiado a GetSupplier
+            if (supplier == null)
+            {
+                return NotFound();
+            }
             return View(supplier);
         }
 
-        // GET: Suppliers/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Suppliers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SuppliersAddModels supplierAddModel)
+        public IActionResult Create(SuppliersAddModels supplier) // Cambiado a SuppliersAddModels
         {
             if (ModelState.IsValid)
             {
-                suppliersDb.SaveSupplier(supplierAddModel);
+                suppliersServices.SaveSupplier(supplier);
                 return RedirectToAction(nameof(Index));
             }
-            return View(supplierAddModel);
-        }
-
-        // GET: Suppliers/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var supplier = suppliersDb.GetSupplier(id);
             return View(supplier);
         }
 
-        // POST: Suppliers/Edit/5
+        public IActionResult Edit(int id)
+        {
+            var supplier = suppliersServices.GetSuppliers(id); // Cambiado a GetSupplier
+            if (supplier == null)
+            {
+                return NotFound();
+            }
+            return View(supplier);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, SuppliersUpdateModels supplierUpdateModel)
+        public IActionResult Edit(int id, SuppliersUpdateModels supplier)
         {
             if (ModelState.IsValid)
             {
-                supplierUpdateModel.SupplierId = id;
-                suppliersDb.UpdateSupplier(supplierUpdateModel);
+                suppliersServices.UpdateSupplier(supplier);
                 return RedirectToAction(nameof(Index));
             }
-            return View(supplierUpdateModel);
-        }
-
-        // GET: Suppliers/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var supplier = suppliersDb.GetSupplier(id);
             return View(supplier);
         }
 
-        // POST: Suppliers/Delete/5
-        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var supplier = suppliersServices.GetSuppliers(id); // Cambiado a GetSupplier
+            if (supplier == null)
+            {
+                return NotFound();
+            }
+            return View(supplier);
+        }
+
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(int id)
         {
             try
             {
                 var supplierRemoveModel = new SuppliersRemoveModels
                 {
-                    SupplierId = id
+                    SupplierID = id
                 };
 
-                suppliersDb.RemoveSupplier(supplierRemoveModel);
+                suppliersServices.RemoveSupplier(supplierRemoveModel); // Cambiado a RemoveSupplier con modelo
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -8,8 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "InstNwnd.Web/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "6.0.31",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.31",
+          "Microsoft.EntityFrameworkCore.Tools": "6.0.31",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16"
         },
         "runtime": {
@@ -1149,6 +1149,18 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/6.0.31": {},
+      "Microsoft.EntityFrameworkCore.Design/6.0.31": {
+        "dependencies": {
+          "Humanizer.Core": "2.14.1",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.31"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "6.0.31.0",
+            "fileVersion": "6.0.3124.26901"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/6.0.31": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.31",
@@ -1171,6 +1183,11 @@
             "assemblyVersion": "6.0.31.0",
             "fileVersion": "6.0.3124.26901"
           }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Tools/6.0.31": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "6.0.31"
         }
       },
       "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
@@ -2986,6 +3003,13 @@
       "path": "microsoft.entityframeworkcore.analyzers/6.0.31",
       "hashPath": "microsoft.entityframeworkcore.analyzers.6.0.31.nupkg.sha512"
     },
+    "Microsoft.EntityFrameworkCore.Design/6.0.31": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Up+uCFCYxcVsXmwW227jh1JCbxEhQPJgpWT7J91H/ofcN+ONB7j1C2A+SMOqCxoabWWh88JLKyMOFKhcudwsZA==",
+      "path": "microsoft.entityframeworkcore.design/6.0.31",
+      "hashPath": "microsoft.entityframeworkcore.design.6.0.31.nupkg.sha512"
+    },
     "Microsoft.EntityFrameworkCore.Relational/6.0.31": {
       "type": "package",
       "serviceable": true,
@@ -2999,6 +3023,13 @@
       "sha512": "sha512-OysGn6n0UonjIzUVq6v21gSPtOqHZEAZes61TC71oIZrKPXvNEjlY5FNCQlzz97Fe8RGuy6sBSgZKBGvFrC72A==",
       "path": "microsoft.entityframeworkcore.sqlserver/6.0.31",
       "hashPath": "microsoft.entityframeworkcore.sqlserver.6.0.31.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Tools/6.0.31": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7AOFHl57aZPgjshTg7hY1s5K68Gt8SpOTuKqDGOt8G19HQDYVxGe0vpieeKdf/FbYqeYfxab2/5cDZYAH00E9g==",
+      "path": "microsoft.entityframeworkcore.tools/6.0.31",
+      "hashPath": "microsoft.entityframeworkcore.tools.6.0.31.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
       "type": "package",

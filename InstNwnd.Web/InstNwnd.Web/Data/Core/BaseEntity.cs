@@ -2,7 +2,7 @@
 {
     public abstract class BaseEntity
     {
-        public int Id { get; set; } // Primary Key
+        public int ID { get; set; } // Primary Key
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
         public bool Deleted { get; set; } = false;

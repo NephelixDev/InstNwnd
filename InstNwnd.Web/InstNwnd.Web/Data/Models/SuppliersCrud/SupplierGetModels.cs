@@ -2,7 +2,7 @@
 {
     public class SupplierGetModels
     {
-        public int SupplierId { get; set; }
+        public int SupplierID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
@@ -15,8 +15,5 @@
         public string Fax { get; set; }
         public string HomePage { get; set; }
         public bool Deleted { get; set; }
-        public DateTime? DeleteDate { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime CreationDate { get; set; }
     }
 }

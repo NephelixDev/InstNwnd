@@ -1,12 +1,20 @@
-﻿using InstNwnd.Web.Data.Core;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstNwnd.Web.Data.Entities
 {
-    public class Shippers : BaseEntity
+    [Table("Shippers", Schema = "dbo")]
+    public class Shippers
     {
-        public int ShipperID { get; set; }  
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ShipperID { get; set; }
 
+        [Required]
+        [MaxLength(40)]
         public string CompanyName { get; set; }
-        public new string Phone { get; set; }
+
+        [MaxLength(24)]
+        public string Phone { get; set; }
     }
 }

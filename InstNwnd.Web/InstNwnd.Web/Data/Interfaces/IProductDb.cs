@@ -1,15 +1,13 @@
-﻿using InstNwnd.Web.Data.Entities;
-using InstNwnd.Web.Data.Models.ProductCrud;
-using System.Collections.Generic;
+﻿using InstNwnd.Web.Data.Models.ProductCrud;
 
 namespace InstNwnd.Web.Data.Interfaces
 {
     public interface IProductDb
     {
-        List<Product> GetProducts();
-        Product GetProduct(int productId);
-        void SaveProduct(ProductAddModels productAdd);
-        void UpdateProduct(ProductUpdateModels productUpdate);
-        void RemoveProduct(ProductRemoveModels productRemove);
+        List<ProductGetModels> GetProducts();
+        ProductGetModels GetProducts(int productId);
+        void RemoveProduct(ProductRemoveModels Removeproduct);
+        void SaveProduct(ProductAddModels saveProduct); // Asegúrate de que esta firma sea correcta
+        void UpdateProduct(ProductUpdateModels updateProduct);
     }
 }

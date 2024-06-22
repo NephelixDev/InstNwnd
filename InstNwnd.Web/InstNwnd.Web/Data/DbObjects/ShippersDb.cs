@@ -1,8 +1,9 @@
 ﻿using InstNwnd.Web.Data.Context;
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Interfaces;
+using InstNwnd.Web.Data.Models.ShipperCrud;
 using InstNwnd.Web.Data.Models.ShippersCrud;
- using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,23 @@ namespace InstNwnd.Web.Data.DbObjects
             this.context = context;
         }
 
-        public Shippers GetShipper(int shipperId)
+        private Shippers ValidateShipperExists(int ShipperID)
+        {
+            var shippers = context.Shippers.Find(ShipperID);
+            return shippers;
+        }
+
+        public List<ShippersGetModels> GetShippers()
+        {
+            return this.context.Shippers.Select(s => new ShippersGetModels
+            {
+                ShipperID = s.ShipperID,
+                CompanyName = s.CompanyName,
+                Phone = s.Phone
+            }).ToList();
+        }
+
+        public ShippersGetModels GetShippers(int shipperId)
         {
             var shipper = this.context.Shippers.Find(shipperId);
 
@@ -26,24 +43,19 @@ namespace InstNwnd.Web.Data.DbObjects
                 throw new Exception("This shipper is not registered.");
             }
 
-            return shipper;
-        }
-
-        public List<Shippers> GetShippers()
-        {
-            return this.context.Shippers.ToList();
+            return new ShippersGetModels
+            {
+                ShipperID = shipper.ShipperID,
+                CompanyName = shipper.CompanyName,
+                Phone = shipper.Phone
+            };
         }
 
         public void RemoveShipper(ShippersRemoveModels removeShipper)
         {
-            var shipperToDelete = this.context.Shippers.Find(removeShipper.ShipperId);
+            var shippers = context.Shippers.Find(removeShipper.ShipperID);
 
-            if (shipperToDelete == null)
-            {
-                throw new Exception("This shipper is not registered.");
-            }
-
-            this.context.Shippers.Remove(shipperToDelete);
+            this.context.Shippers.Remove(shippers);
             this.context.SaveChanges();
         }
 
@@ -61,7 +73,7 @@ namespace InstNwnd.Web.Data.DbObjects
 
         public void UpdateShipper(ShippersUpdateModels updateShipper)
         {
-            var shipperToUpdate = this.context.Shippers.Find(updateShipper.ShipperId);
+            var shipperToUpdate = this.context.Shippers.Find(updateShipper.ShipperID);
 
             if (shipperToUpdate == null)
             {

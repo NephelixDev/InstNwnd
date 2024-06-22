@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<InstNwnd.Web.Data.Models.ProductCrud.ProductGetModels>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products";
 }
 
 <h1>Products</h1>
@@ -12,7 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-           
             <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
@@ -26,19 +25,13 @@
                 @Html.DisplayNameFor(model => model.UnitsInStock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Deleted)
+                @Html.DisplayNameFor(model => model.SupplierID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeleteDate)
+                @Html.DisplayNameFor(model => model.CategoryID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
+                @Html.DisplayNameFor(model => model.Discontinued)
             </th>
             <th></th>
         </tr>
@@ -46,10 +39,15 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-             
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryID)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QuantityPerUnit)
             </td>
@@ -60,24 +58,13 @@
                 @Html.DisplayFor(modelItem => item.UnitsInStock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Deleted)
+                @Html.DisplayFor(modelItem => item.Discontinued)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeleteDate)
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.ProductID })
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.ProductId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-             </td>
         </tr>
 }
     </tbody>

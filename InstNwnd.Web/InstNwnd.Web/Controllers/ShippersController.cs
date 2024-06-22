@@ -1,31 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using InstNwnd.Web.Data.Interfaces;
-using System;
 using InstNwnd.Web.Data.Models.ShippersCrud;
+using System;
+using InstNwnd.Web.BL.Services;
 
 namespace InstNwnd.Web.Controllers
 {
     public class ShippersController : Controller
     {
-        private readonly IShippersDb shippersDb;
+        private readonly IShippersDb ShippersServices;
 
         public ShippersController(IShippersDb shippersDb)
         {
-            this.shippersDb = shippersDb;
+            this.ShippersServices = shippersDb;
         }
 
         // GET: Shippers
         public ActionResult Index()
         {
-            var shippers = shippersDb.GetShippers();
+            var shippers = ShippersServices.GetShippers();
             return View(shippers);
         }
 
         // GET: Shippers/Details/5
         public ActionResult Details(int id)
         {
-            var shipper = shippersDb.GetShipper(id);
+            var shipper = ShippersServices.GetShippers(id);
             return View(shipper);
         }
 
@@ -42,7 +43,7 @@ namespace InstNwnd.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                shippersDb.SaveShipper(shipperAddModel);
+                ShippersServices.SaveShipper(shipperAddModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(shipperAddModel);
@@ -51,7 +52,7 @@ namespace InstNwnd.Web.Controllers
         // GET: Shippers/Edit/5
         public ActionResult Edit(int id)
         {
-            var shipper = shippersDb.GetShipper(id);
+            var shipper = ShippersServices.GetShippers(id);
             return View(shipper);
         }
 
@@ -62,8 +63,7 @@ namespace InstNwnd.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                shipperUpdateModel.ShipperId = id;
-                shippersDb.UpdateShipper(shipperUpdateModel);
+                ShippersServices.UpdateShipper(shipperUpdateModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(shipperUpdateModel);
@@ -72,7 +72,7 @@ namespace InstNwnd.Web.Controllers
         // GET: Shippers/Delete/5
         public ActionResult Delete(int id)
         {
-            var shipper = shippersDb.GetShipper(id);
+            var shipper = ShippersServices.GetShippers(id);
             return View(shipper);
         }
 
@@ -85,10 +85,10 @@ namespace InstNwnd.Web.Controllers
             {
                 var shipperRemoveModel = new ShippersRemoveModels
                 {
-                    ShipperId = id
+                    ShipperID = id
                 };
 
-                shippersDb.RemoveShipper(shipperRemoveModel);
+                ShippersServices.RemoveShipper(shipperRemoveModel);
                 return RedirectToAction(nameof(Index));
             }
             catch
