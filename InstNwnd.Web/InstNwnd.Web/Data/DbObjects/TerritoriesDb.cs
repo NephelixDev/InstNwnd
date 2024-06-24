@@ -1,12 +1,9 @@
-﻿using InstNwnd.Web.BL.Exceptions;
-using InstNwnd.Web.Data.Context;
+﻿using InstNwnd.Web.Data.Context;
 using InstNwnd.Web.Data.Entities;
 using InstNwnd.Web.Data.Exceptions;
 using InstNwnd.Web.Data.Interfaces;
-using InstNwnd.Web.Data.Models;
 using InstNwnd.Web.Data.Models.Territories;
-
-
+using Microsoft.EntityFrameworkCore;
 
 namespace InstNwnd.Web.Data.DbObjects
 {
@@ -18,81 +15,77 @@ namespace InstNwnd.Web.Data.DbObjects
         {
             this.context = context;
         }
-        public TerritoriesGetModel GetTerritories(int TerritoryID)
+
+        private Territories ValidateTerritoryExists(string territoryID)
         {
-            var Territories = this.context.Territories.Find(TerritoryID);
-
-            if (Territories is null)
+            var territory = context.Territories.Find(territoryID);
+            if (territory == null)
             {
-                throw new TerritoriesDbException($"No se encontro el departamento con el id {TerritoryID}");
+                throw new TerritoriesDbException($"No se encontró el territorio con el id {territoryID}");
             }
+            return territory;
+        }
 
-            TerritoriesGetModel TerritoriesModel = new TerritoriesGetModel()
+        private static TerritoriesGetModel MapToModel(Territories entity)
+        {
+            return new TerritoriesGetModel
             {
-                TerritoryID = Territories.TerritoryID,
-                TerritoryDescription = Territories.TerritoryDescription,
+                TerritoryID = entity.TerritoryID,
+                TerritoryDescription = entity.TerritoryDescription,
+                RegionID = entity.RegionID
             };
+        }
 
-            return TerritoriesModel;
+        private Territories MapToEntity(TerritoriesSaveModel model)
+        {
+            var entity = new Territories
+            {
+                TerritoryID = model.TerritoryID,
+                TerritoryDescription = model.TerritoryDescription,
+                RegionID = model.RegionID
+            };
+            return entity;
+        }
+
+        private void MapToEntity(TerritoriesUpdateModel model, Territories entity)
+        {
+            entity.TerritoryDescription = model.TerritoryDescription;
+            entity.RegionID = model.RegionID;
         }
 
         public List<TerritoriesGetModel> GetTerritories()
         {
-            return this.context.Territories
-                .Select(Territories  => new TerritoriesGetModel()
-            {
-                    TerritoryID = Territories.TerritoryID,
-                TerritoryDescription = Territories.TerritoryDescription,
-            }).ToList();
+            return context.Territories
+                .Select(territory => MapToModel(territory))
+                .ToList();
         }
 
-       
-
-        public void RemoveTerritories(TerritoriesRemoveModel TerritoriesRemove)
+        public TerritoriesGetModel GetTerritories(string territoryID)
         {
-            Territories TerritoriesToDelete = this.context.Territories.Find(TerritoriesRemove.TerritoryID);
-
-            if (TerritoriesToDelete is null)
-            {
-                throw new TerritoriesDbException("El departamento no se encuentra registrado.");
-            }
-
-
-            
-
-            this.context.Territories.Update(TerritoriesToDelete);
-
-            this.context.SaveChanges();
-
-
+            var territory = ValidateTerritoryExists(territoryID);
+            return MapToModel(territory);
         }
 
-        public void SaveTerritories(TerritoriesSaveModel TerritoriesSave)
+        public void RemoveTerritories(TerritoriesRemoveModel territoryRemove)
         {
-
-            Territories Territories = new Territories()
-            {
-        
-            };
-
-            this.context.Territories.Add(Territories);
-            this.context.SaveChanges();
+            var territory = ValidateTerritoryExists(territoryRemove.TerritoryID);
+            context.Territories.Remove(territory);
+            context.SaveChanges();
         }
 
-        public void UpdateTerritories(TerritoriesUpdateModel updateTerritories)
+        public void SaveTerritories(TerritoriesSaveModel territorySave)
         {
-            Territories TerritoriesToUpdate = this.context.Territories.Find(updateTerritories.TerritoryID);
+            var territory = MapToEntity(territorySave);
+            context.Territories.Add(territory);
+            context.SaveChanges();
+        }
 
-
-            if (TerritoriesToUpdate is null)
-            {
-                throw new TerritoriesDbException("El departamento no se encuentra registrado.");
-            }
-        
-
-            this.context.Territories.Update(TerritoriesToUpdate);
-            this.context.SaveChanges();
+        public void UpdateTerritories(TerritoriesUpdateModel updateTerritory)
+        {
+            var territory = ValidateTerritoryExists(updateTerritory.TerritoryID);
+            MapToEntity(updateTerritory, territory);
+            context.Territories.Update(territory);
+            context.SaveChanges();
         }
     }
-
 }

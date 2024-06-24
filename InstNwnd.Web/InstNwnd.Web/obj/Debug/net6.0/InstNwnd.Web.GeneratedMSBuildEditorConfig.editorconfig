@@ -58,8 +58,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVycml0b3JpZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kelobel/Source/Repos/NephelixDev/InstNwnd/InstNwnd.Web/InstNwnd.Web/Views/Territories/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVycml0b3JpZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kelobel/Source/Repos/NephelixDev/InstNwnd/InstNwnd.Web/InstNwnd.Web/Views/Territories/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVycml0b3JpZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kelobel/Source/Repos/NephelixDev/InstNwnd/InstNwnd.Web/InstNwnd.Web/Views/Territories/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVycml0b3JpZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kelobel/Source/Repos/NephelixDev/InstNwnd/InstNwnd.Web/InstNwnd.Web/Views/Territories/Index.cshtml]

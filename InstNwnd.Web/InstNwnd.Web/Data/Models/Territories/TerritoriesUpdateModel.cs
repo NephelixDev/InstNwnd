@@ -1,10 +1,8 @@
 ﻿namespace InstNwnd.Web.Data.Models.Territories
 {
-    public class TerritoriesUpdateModel
+    public class TerritoriesUpdateModel:TerritoryBaseModel
     {
-        public string? TerritoryID { get; set; }
-        public string? TerritoryDescription { get; set; }
-        public int RegionID { get; set; }
+       
       
     }
 }
