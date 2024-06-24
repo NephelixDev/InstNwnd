@@ -84,8 +84,10 @@ namespace InstNwnd.Web.Controllers
         }
 
         // GET: EmployeesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+
+        [ValidateAntiForgeryToken]
+
         public ActionResult Edit(EmployeesUpdateModels employeesUpdate)
         {
             try

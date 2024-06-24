@@ -11,6 +11,7 @@ namespace InstNwnd.Web.Data.Context
 
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Orders> Orders { get; set; }
+        public DbSet<Shippers> Shippers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,7 +28,15 @@ namespace InstNwnd.Web.Data.Context
                 entity.Property(e => e.Region).HasMaxLength(15);
                 entity.Property(e => e.PostalCode).HasMaxLength(10);
                 entity.Property(e => e.Country).HasMaxLength(15);
+            });
 
+            // Configuración de la entidad Shippers
+            modelBuilder.Entity<Shippers>(entity =>
+            {
+                entity.HasKey(e => e.ShipperID);
+
+                entity.Property(e => e.CompanyName).HasMaxLength(40).IsRequired();
+                entity.Property(e => e.Phone).HasMaxLength(24);
             });
 
             // Configuración de la entidad Orders
@@ -48,6 +57,9 @@ namespace InstNwnd.Web.Data.Context
                       .WithMany(e => e.Orders)
                       .HasForeignKey(o => o.EmployeeID);
 
+                entity.HasOne(o => o.Shipper)
+                      .WithMany(s => s.Orders)
+                      .HasForeignKey(o => o.ShipVia);
             });
 
             // Configuración adicional si es necesario

@@ -23,10 +23,12 @@ namespace InstNwnd.Web.Data.Entities
         public DateTime? RequiredDate { get; set; }
 
         public DateTime? ShippedDate { get; set; }
-        [ForeignKey("ShipVia")]
+
+        [ForeignKey("ShipVia")] // Nombre de la columna que actúa como clave externa
         public int? ShipVia { get; set; }
 
         public decimal? Freight { get; set; }
+
         [MaxLength(40)]
         public string? ShipName { get; set; }
 
@@ -45,8 +47,11 @@ namespace InstNwnd.Web.Data.Entities
         [MaxLength(15)]
         public string? ShipCountry { get; set; }
 
-        // Propiedad de navegación
+        // Propiedades de navegación
         [ForeignKey("EmployeeID")]
         public Employees Employee { get; set; }
+
+        [ForeignKey("ShipVia")]
+        public Shippers Shipper { get; set; } // Propiedad de navegación para Shippers
     }
 }
