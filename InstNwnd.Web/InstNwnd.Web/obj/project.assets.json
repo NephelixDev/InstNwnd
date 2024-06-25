@@ -8,24 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\smith\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\almc0\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\smith\\OneDrive\\Escritorio\\tareas\\InstNwnd\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
+      "projectUniqueName": "C:\\Users\\almc0\\Source\\Repos\\NephelixDev\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
       "projectName": "InstNwnd.Web",
-      "projectPath": "C:\\Users\\smith\\OneDrive\\Escritorio\\tareas\\InstNwnd\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
-      "packagesPath": "C:\\Users\\smith\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\smith\\OneDrive\\Escritorio\\tareas\\InstNwnd\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\obj\\",
+      "projectPath": "C:\\Users\\almc0\\Source\\Repos\\NephelixDev\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\InstNwnd.Web.csproj",
+      "packagesPath": "C:\\Users\\almc0\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\almc0\\Source\\Repos\\NephelixDev\\InstNwnd\\InstNwnd.Web\\InstNwnd.Web\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\smith\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\almc0\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -75,7 +70,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

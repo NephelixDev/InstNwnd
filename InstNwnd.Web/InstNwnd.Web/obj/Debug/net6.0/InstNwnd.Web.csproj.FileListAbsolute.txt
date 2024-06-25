@@ -28,3 +28,14 @@ C:\Users\almc0\OneDrive\Escritorio\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\
 C:\Users\almc0\OneDrive\Escritorio\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.pdb
 C:\Users\almc0\OneDrive\Escritorio\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.genruntimeconfig.cache
 C:\Users\almc0\OneDrive\Escritorio\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\ref\InstNwnd.Web.dll
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.AssemblyInfoInputs.cache
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.AssemblyInfo.cs
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.csproj.CoreCompileInputs.cache
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.RazorAssemblyInfo.cache
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.RazorAssemblyInfo.cs
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.sourcelink.json
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.dll
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\refint\InstNwnd.Web.dll
+C:\Users\almc0\Source\Repos\NephelixDev\InstNwnd\InstNwnd.Web\InstNwnd.Web\obj\Debug\net6.0\InstNwnd.Web.pdb
